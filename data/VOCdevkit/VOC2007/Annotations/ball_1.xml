@@ -1,0 +1,26 @@
+<annotation>
+	<folder>JPEGImages</folder>
+	<filename>ball_1.jpg</filename>
+	<path>/home/kevin/deep_learning_collection/v831_yolo/data/custom/JPEGImages/ball_1.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>480</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>ball</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>36</xmin>
+			<ymin>245</ymin>
+			<xmax>247</xmax>
+			<ymax>436</ymax>
+		</bndbox>
+	</object>
+</annotation>
