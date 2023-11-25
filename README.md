@@ -1,6 +1,6 @@
 # YOLOX_Automatic-Labeling
 ## Introduction
-The codes have been adapted from Megvii-BaseDetection/YOLOX and can assist with automatic labeling. Follow the steps outlined on the [Megvii-BaseDetection/YOLOX](https://github.com/Megvii-BaseDetection/YOLOX) GitHub page to train or evaluate your model. When evaluating your trained model, the modified YOLOX/tools/demo.py can be used to generate XML annotation files that correspond to the evaluation photos. For detailed instructions, refer to the blog posts linked below. If you find this helpful, don't forget to give us a star on GitHub. Thank you!
+The codes have been adapted from Megvii-BaseDetection/YOLOX and can assist with automatic labeling. Follow the steps outlined on the [Megvii-BaseDetection/YOLOX](https://github.com/Megvii-BaseDetection/YOLOX) GitHub page to train or evaluate your model. When evaluating your trained model, the modified YOLOX/tools/demo.py can be used to generate XML annotation files that correspond to the evaluation photos. For detailed instructions, refer to the blog posts linked below. If you find this helpful, don't forget to give us a star on GitHub.  Thank you!
 
 ## Cite YOLOX 
 ```latex
