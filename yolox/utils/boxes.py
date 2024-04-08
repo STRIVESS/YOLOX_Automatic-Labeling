@@ -30,13 +30,19 @@ def filter_box(output, scale_range):
 
 
 def postprocess(prediction, num_classes, conf_thre=0.7, nms_thre=0.45, class_agnostic=False):
+    # 创建一个与 prediction 张量相同类型和形状的新张量，用于存储边界框的角点坐标
     box_corner = prediction.new(prediction.shape)
+    # 分别计算边界框左上角x坐标、左上角y坐标、右下角x坐标、右下角y坐标
+    # prediction[:, :, 0/1] 表示预测框的中心 x 坐标，y 坐标
+    # prediction[:, :, 2/3] 表示预测框的宽度和高度
     box_corner[:, :, 0] = prediction[:, :, 0] - prediction[:, :, 2] / 2
     box_corner[:, :, 1] = prediction[:, :, 1] - prediction[:, :, 3] / 2
     box_corner[:, :, 2] = prediction[:, :, 0] + prediction[:, :, 2] / 2
     box_corner[:, :, 3] = prediction[:, :, 1] + prediction[:, :, 3] / 2
+    # 用计算得到的边界框角点坐标替换 prediction 张量中原始的边界框坐标
     prediction[:, :, :4] = box_corner[:, :, :4]
 
+    # 创建一个列表，用于存储每个图像的检测结果
     output = [None for _ in range(len(prediction))]
     for i, image_pred in enumerate(prediction):
 

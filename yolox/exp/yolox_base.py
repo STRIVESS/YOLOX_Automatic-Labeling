@@ -20,7 +20,7 @@ class Exp(BaseExp):
         # ---------------- model config ---------------- #
         # detect classes number of model
         # self.num_classes = 80
-        self.num_classes = 6
+        self.num_classes = 4
         # factor of model depth
         self.depth = 1.00
         # factor of model width
@@ -32,7 +32,8 @@ class Exp(BaseExp):
         # set worker to 4 for shorter dataloader init time
         # If your training process cost many memory, reduce this value.
         self.data_num_workers = 4
-        self.input_size = (640, 640)  # (height, width)
+        # self.input_size = (640, 640)  # (height, width)
+        self.input_size = (416, 416)  # (height, width)
         # Actual multiscale ranges: [640 - 5 * 32, 640 + 5 * 32].
         # To disable multiscale training, set the value to 0.
         self.multiscale_range = 5
@@ -71,7 +72,8 @@ class Exp(BaseExp):
         # epoch number used for warmup
         self.warmup_epochs = 5
         # max training epoch
-        self.max_epoch = 300
+        # self.max_epoch = 300
+        self.max_epoch = 250
 
         # minimum learning rate during warmup
         self.warmup_lr = 0
@@ -95,6 +97,7 @@ class Exp(BaseExp):
 
         # eval period in epoch, for example,
         # if set to 1, model will be evaluate after every epoch.
+        # self.eval_interval = 10
         self.eval_interval = 10
 
         # save history checkpoint or not.
@@ -105,7 +108,8 @@ class Exp(BaseExp):
 
         # -----------------  testing config ------------------ #
         # output image size during evaluation/test
-        self.test_size = (640, 640)
+        # self.test_size = (640, 640)
+        self.test_size = (416, 416)
         # confidence threshold during evaluation/test,
         # boxes whose scores are less than test_conf will be filtered
         self.test_conf = 0.01

@@ -21,7 +21,6 @@ from .voc_classes import VOC_CLASSES
 
 
 class AnnotationTransform(object):
-
     """Transforms a VOC annotation into a Tensor of bbox coords and label index
     Initilized with a dictionary lookup of classnames to indexes
 
@@ -80,7 +79,6 @@ class AnnotationTransform(object):
 
 
 class VOCDetection(CacheDataset):
-
     """
     VOC Detection Dataset Object
 
@@ -99,16 +97,16 @@ class VOCDetection(CacheDataset):
     """
 
     def __init__(
-        self,
-        data_dir,
-        # image_sets=[("2007", "trainval"), ("2012", "trainval")],
-        image_sets=[("2007", "trainval")],
-        img_size=(416, 416),
-        preproc=None,
-        target_transform=AnnotationTransform(),
-        dataset_name="VOC0712",
-        cache=False,
-        cache_type="ram",
+            self,
+            data_dir,
+            # image_sets=[("2007", "trainval"), ("2012", "trainval")],
+            image_sets=[("2007", "trainval")],
+            img_size=(416, 416),
+            preproc=None,
+            target_transform=AnnotationTransform(),
+            dataset_name="VOC0712",
+            cache=False,
+            cache_type="ram",
     ):
         self.root = data_dir
         self.image_set = image_sets
@@ -128,10 +126,16 @@ class VOCDetection(CacheDataset):
             self._year = year
             rootpath = os.path.join(self.root, "VOC" + year)
             for line in open(
-                os.path.join(rootpath, "ImageSets", "Main", name + ".txt")
+                    os.path.join(rootpath, "ImageSets", "Main", name + ".txt")
             ):
                 self.ids.append((rootpath, line.strip()))
         self.num_imgs = len(self.ids)
+
+        # Reinitialize class_to_ind attribute with updated classes
+        # self.target_transform.class_to_ind = {
+        #     cls: idx for idx, cls in enumerate(VOC_CLASSES)
+        # }
+        # self.target_transform = AnnotationTransform(class_to_ind=self.class_to_ind)
 
         self.annotations = self._load_coco_annotations()
 
@@ -262,7 +266,8 @@ class VOCDetection(CacheDataset):
                 for im_ind, index in enumerate(self.ids):
                     index = index[1]
                     dets = all_boxes[cls_ind][im_ind]
-                    if dets == []:
+                    # if dets == []:
+                    if (dets.shape[0] == 0):
                         continue
                     for k in range(dets.shape[0]):
                         f.write(

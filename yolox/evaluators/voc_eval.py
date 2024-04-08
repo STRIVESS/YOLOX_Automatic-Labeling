@@ -68,13 +68,13 @@ def voc_ap(rec, prec, use_07_metric=False):
 
 
 def voc_eval(
-    detpath,
-    annopath,
-    imagesetfile,
-    classname,
-    cachedir,
-    ovthresh=0.5,
-    use_07_metric=False,
+        detpath,
+        annopath,
+        imagesetfile,
+        classname,
+        cachedir,
+        ovthresh=0.5,
+        use_07_metric=False,
 ):
     # first load gt
     if not os.path.isdir(cachedir):
@@ -104,6 +104,9 @@ def voc_eval(
     # extract gt objects for this class
     class_recs = {}
     npos = 0
+    # print("imagenames is :", imagenames)
+    # print("classname is :", classname)
+    # print("recs is :", recs)
     for imagename in imagenames:
         R = [obj for obj in recs[imagename] if obj["name"] == classname]
         bbox = np.array([x["bbox"] for x in R])
@@ -153,8 +156,8 @@ def voc_eval(
 
             # union
             uni = (
-                (bb[2] - bb[0] + 1.0) * (bb[3] - bb[1] + 1.0)
-                + (BBGT[:, 2] - BBGT[:, 0] + 1.0) * (BBGT[:, 3] - BBGT[:, 1] + 1.0) - inters
+                    (bb[2] - bb[0] + 1.0) * (bb[3] - bb[1] + 1.0)
+                    + (BBGT[:, 2] - BBGT[:, 0] + 1.0) * (BBGT[:, 3] - BBGT[:, 1] + 1.0) - inters
             )
 
             overlaps = inters / uni

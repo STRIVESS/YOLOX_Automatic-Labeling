@@ -25,11 +25,25 @@
 #     "train",
 #     "tvmonitor",
 # )
+
 VOC_CLASSES = (
     "ball",
     "person",
     "dog",
-    "animal faeces",
-    "chair",
-    "cat",
+    "animal_faeces",
 )
+# VOC_CLASSES = (
+#     "cat",
+#     "person",
+#     "ball",
+#     "rabbit",
+#     "dog",
+#     "hedgehog",
+#     "mushroom",
+# )
+
+
+# VOC_CLASSES = (
+#     "person",
+#     "squirrel",
+# )

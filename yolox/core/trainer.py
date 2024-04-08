@@ -102,19 +102,19 @@ class Trainer:
         data_end_time = time.time()
 
         with torch.cuda.amp.autocast(enabled=self.amp_training):
-            outputs = self.model(inps, targets)
+            outputs = self.model(inps, targets) #执行模型的前向传播
 
-        loss = outputs["total_loss"]
+        loss = outputs["total_loss"] #从模型输出中提取损失值，可以是总损失或者多个损失项的组合
 
-        self.optimizer.zero_grad()
-        self.scaler.scale(loss).backward()
+        self.optimizer.zero_grad() #将损失值传播回模型，使用优化器更新模型的参数
+        self.scaler.scale(loss).backward() #如果启用了混合精度训练，缩放损失并执行反向传播
         self.scaler.step(self.optimizer)
         self.scaler.update()
 
         if self.use_model_ema:
-            self.ema_model.update(self.model)
+            self.ema_model.update(self.model) #更新模型的EMA参数
 
-        lr = self.lr_scheduler.update_lr(self.progress_in_iter + 1)
+        lr = self.lr_scheduler.update_lr(self.progress_in_iter + 1) #学习率更新
         for param_group in self.optimizer.param_groups:
             param_group["lr"] = lr
 

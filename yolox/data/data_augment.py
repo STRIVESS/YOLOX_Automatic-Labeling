@@ -227,7 +227,7 @@ class ValTransform:
         transform (transform) : callable transform to be applied to test/val
         data
     """
-
+    #将通道顺序从 RGB 调整为 BGR
     def __init__(self, swap=(2, 0, 1), legacy=False):
         self.swap = swap
         self.legacy = legacy
@@ -236,8 +236,8 @@ class ValTransform:
     def __call__(self, img, res, input_size):
         img, _ = preproc(img, input_size, self.swap)
         if self.legacy:
-            img = img[::-1, :, :].copy()
-            img /= 255.0
-            img -= np.array([0.485, 0.456, 0.406]).reshape(3, 1, 1)
-            img /= np.array([0.229, 0.224, 0.225]).reshape(3, 1, 1)
+            img = img[::-1, :, :].copy() #翻转图像的通道顺序，从 BGR 到 RGB
+            img /= 255.0 #将图像的像素值归一化到 [0, 1] 范围内
+            img -= np.array([0.485, 0.456, 0.406]).reshape(3, 1, 1) #减去均值，为了进行零中心化（zero-centering）
+            img /= np.array([0.229, 0.224, 0.225]).reshape(3, 1, 1) #除以标准差，是为了进行标准化
         return img, np.zeros((1, 5))

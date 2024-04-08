@@ -12,7 +12,7 @@ class Exp(MyExp):
         # self.depth = 0.33
         # self.width = 0.50
 
-        self.num_classes = 6
+        self.num_classes = 4
         self.depth = 1.00
         self.width = 1.00
         self.warmup_epochs = 1
@@ -28,8 +28,8 @@ class Exp(MyExp):
     def get_dataset(self, cache: bool, cache_type: str = "ram"):
         from yolox.data import VOCDetection, TrainTransform
         return VOCDetection(
-            #data_dir=os.path.join(get_yolox_datadir(), "VOCdevkit"),
-            #image_sets=[('2007', 'trainval'), ('2012', 'trainval')],
+            # data_dir=os.path.join(get_yolox_datadir(), "VOCdevkit"),
+            # image_sets=[('2007', 'trainval'), ('2012', 'trainval')],
             data_dir="/home/kevin/deep_learning_collection/YOLOX/data/VOCdevkit",
             image_sets=[('2007', 'trainval')],
             img_size=self.input_size,
@@ -40,6 +40,7 @@ class Exp(MyExp):
             cache=cache,
             cache_type=cache_type,
         )
+
     def get_eval_dataset(self, **kwargs):
         from yolox.data import VOCDetection, ValTransform
         legacy = kwargs.get("legacy", False)
